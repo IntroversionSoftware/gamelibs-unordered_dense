@@ -28,5 +28,7 @@ project('unordered_dense', 'cpp',
     ])
 
 incdir = include_directories('include')
-subdir('test')
 
+if not meson.is_subproject()
+  subdir('test')
+endif
