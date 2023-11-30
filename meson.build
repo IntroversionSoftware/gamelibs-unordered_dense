@@ -29,6 +29,10 @@ project('unordered_dense', 'cpp',
 
 incdir = include_directories('include')
 
+unordered_dense_dep = declare_dependency(
+  include_directories: incdir
+)
+
 if not meson.is_subproject()
   subdir('test')
 endif
