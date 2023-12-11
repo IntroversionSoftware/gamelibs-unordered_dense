@@ -88,6 +88,7 @@ foreach arg : [
             '-Wno-stringop-overflow', # g++ error in fmtlib
             '-Warith-conversion',
             '-Wshadow=global',
+            '-Wno-array-bounds', # gcc 13 gives incorrect warning
 
             # gcc / clang
             '-Wconversion',
