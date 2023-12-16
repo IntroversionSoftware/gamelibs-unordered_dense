@@ -33,6 +33,8 @@ unordered_dense_dep = declare_dependency(
   include_directories: incdir
 )
 
+meson.override_dependency('unordered_dense', unordered_dense_dep)
+
 if not meson.is_subproject()
   subdir('test')
 endif
