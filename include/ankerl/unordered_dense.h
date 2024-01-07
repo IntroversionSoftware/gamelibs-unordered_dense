@@ -58,8 +58,18 @@
 #    define ANKERL_UNORDERED_DENSE_PACK(decl) __pragma(pack(push, 1)) decl __pragma(pack(pop))
 #endif
 
+#if defined(__has_feature)
+#    define ANKERL_HAS_FEATURE(x) __has_feature(x)
+#else
+#    define ANKERL_HAS_FEATURE(x) 0
+#endif
+
 // exceptions
-#if defined(__cpp_exceptions) || defined(__EXCEPTIONS) || defined(_CPPUNWIND)
+#if defined(__clang__) && ANKERL_HAS_FEATURE(cxx_exceptions)
+#    define ANKERL_UNORDERED_DENSE_HAS_EXCEPTIONS() 1 // NOLINT(cppcoreguidelines-macro-usage)
+#elif defined(__GNUC__) && !defined(__clang__) && defined(__EXCEPTIONS)
+#    define ANKERL_UNORDERED_DENSE_HAS_EXCEPTIONS() 1 // NOLINT(cppcoreguidelines-macro-usage)
+#elif defined(_MSC_VER) && defined(_CPPUNWIND)
 #    define ANKERL_UNORDERED_DENSE_HAS_EXCEPTIONS() 1 // NOLINT(cppcoreguidelines-macro-usage)
 #else
 #    define ANKERL_UNORDERED_DENSE_HAS_EXCEPTIONS() 0 // NOLINT(cppcoreguidelines-macro-usage)
